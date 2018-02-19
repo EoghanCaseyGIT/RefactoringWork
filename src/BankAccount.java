@@ -1,6 +1,4 @@
 
-
-
 public class BankAccount {
 	
 	private int accountID;

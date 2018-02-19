@@ -1,43 +1,22 @@
 
-
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.EOFException;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
-
+import javax.swing.*;
+import java.io.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.table.*;
+import java.util.*;
 import net.miginfocom.swing.MigLayout;
 
+
+
 public class BankApplication extends JFrame {
+	
+	
+	private static final long serialVersionUID = 1L;
 	
 	ArrayList<BankAccount> accountList = new ArrayList<BankAccount>();
 	static HashMap<Integer, BankAccount> table = new HashMap<Integer, BankAccount>();
 	private final static int TABLE_SIZE = 29;
-	static private final String newline = "\n";
 	
 	JMenuBar menuBar;
 	JMenu navigateMenu, recordsMenu, transactionsMenu, fileMenu, exitMenu;
@@ -53,7 +32,7 @@ public class BankApplication extends JFrame {
 	JTable jTable;
 	double interestRate;
 	
-	int currentItem = 0;
+	int currentItem;
 	
 	
 	boolean openValues;
@@ -62,7 +41,6 @@ public class BankApplication extends JFrame {
 		
 		super("Bank Application");
 		
-		int currentItem;
 		initComponents();
 	}
 	
@@ -234,22 +212,9 @@ public class BankApplication extends JFrame {
 			}
 		};
 		
-		ActionListener next = new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				saveOpenValues();
-				// No next if at end of list.
-				if (currentItem != (table.size()-1)) {
-					// Move to next item.
-						currentItem++;
-					while(!table.containsKey(currentItem) ){
-						currentItem++;
-					}
-					displayDetails(currentItem);			
-				}				
-			}
-		};
+
 		
-		ActionListener next1 = new ActionListener(){
+		ActionListener next = new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				
 				ArrayList<Integer> keyList = new ArrayList<Integer>();
@@ -318,8 +283,8 @@ public class BankApplication extends JFrame {
 			}
 		};
 		
-		nextItemButton.addActionListener(next1);
-		nextItem.addActionListener(next1);
+		nextItemButton.addActionListener(next);
+		nextItem.addActionListener(next);
 		
 		prevItemButton.addActionListener(prev);
 		prevItem.addActionListener(prev);
