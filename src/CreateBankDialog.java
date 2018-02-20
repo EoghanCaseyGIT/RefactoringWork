@@ -3,19 +3,19 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+
 import net.miginfocom.swing.MigLayout;
 
 public class CreateBankDialog extends JFrame {
 
-	
+
+	private static final long serialVersionUID = 1L;
 	private final static int TABLE_SIZE = 29;
 	Random rand = new Random();
 	
 	ArrayList<BankAccount> accountList;
 
 	HashMap<Integer, BankAccount> table = new HashMap<Integer, BankAccount>();
-	
-	
 	
 	
 	public void put(int key, BankAccount value){
@@ -28,18 +28,15 @@ public class CreateBankDialog extends JFrame {
 	}
 	
 	
-	
-	
 	// Constructor code based on that for the Create and Edit dialog classes in the Shapes exercise.
 
 	JLabel accountIDLabel, accountNumberLabel, firstNameLabel, surnameLabel, accountTypeLabel, balanceLabel, overdraftLabel;
 	
 	
-	JComboBox comboBox;
 	JTextField accountNumberTextField;
 	final JTextField firstNameTextField, surnameTextField, accountTypeTextField, balanceTextField, overdraftTextField;
 	
-	CreateBankDialog(HashMap accounts) {
+	CreateBankDialog(HashMap<Integer, BankAccount> accounts) {
 		
 		super("Add Bank Details");
 		
@@ -50,18 +47,9 @@ public class CreateBankDialog extends JFrame {
 		JPanel dataPanel = new JPanel(new MigLayout());
 		
 		
-		
-		
-		
-		
-		
 		String[] comboTypes = {"Current", "Deposit"};
 		
-		final JComboBox comboBox = new JComboBox(comboTypes);
-		
-		
-		accountNumberLabel = new JLabel("Photograph file name: ");
-		accountNumberTextField = new JTextField(15);
+		JComboBox<String> comboBox = new JComboBox<>(comboTypes);
 		
 		accountNumberLabel = new JLabel("Account Number: ");
 		accountNumberTextField = new JTextField(15);
@@ -126,26 +114,15 @@ public class CreateBankDialog extends JFrame {
 				String accountNumber = accountNumberTextField.getText();
 				
 				
-							
-				
 				String surname = surnameTextField.getText();
 				String firstName = firstNameTextField.getText();
 			
 				String accountType = comboBox.getSelectedItem().toString();
-				
-				String balanceStr = balanceTextField.getText();
-				String overdraftStr = overdraftTextField.getText();
-				
-				
 
-				double balance;
-				double overdraft;
-				
 		
 				if (accountNumber != null && accountNumber.length()==8 && surname != null && firstName != null && accountType != null) {
 					try {
 						
-						boolean idTaken = false;
 						boolean accNumTaken=false;
 							
 							int randNumber = rand.nextInt(24) + 1;
@@ -153,7 +130,6 @@ public class CreateBankDialog extends JFrame {
 						 for (Map.Entry<Integer, BankAccount> entry : table.entrySet()) {
 							 
 							 while(randNumber == entry.getValue().getAccountID()){
-								 idTaken = true;
 								 randNumber = rand.nextInt(24)+1;
 							 }		 
 						 }

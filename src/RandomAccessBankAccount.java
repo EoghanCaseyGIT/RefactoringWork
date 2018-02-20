@@ -1,11 +1,9 @@
-
-
-
 import java.io.RandomAccessFile;
 import java.io.IOException;
 
 public class RandomAccessBankAccount extends BankAccount {
-	public static final int SIZE = 140;
+	
+//	public static final int SIZE = 140;
 	
 	public RandomAccessBankAccount(){
 		this(0, "", "", "", "", 0.0, 0.0);

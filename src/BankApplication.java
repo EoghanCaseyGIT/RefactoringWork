@@ -5,15 +5,12 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.table.*;
 import java.util.*;
+
 import net.miginfocom.swing.MigLayout;
-
-
 
 public class BankApplication extends JFrame {
 	
-	
 	private static final long serialVersionUID = 1L;
-	
 	ArrayList<BankAccount> accountList = new ArrayList<BankAccount>();
 	static HashMap<Integer, BankAccount> table = new HashMap<Integer, BankAccount>();
 	private final static int TABLE_SIZE = 29;
@@ -102,7 +99,7 @@ public class BankApplication extends JFrame {
 		JPanel buttonPanel = new JPanel(new GridLayout(1, 4));
 
 		nextItemButton = new JButton(new ImageIcon("next.png"));
-		prevItemButton = new JButton(new ImageIcon("previous.png"));
+		prevItemButton = new JButton(new ImageIcon("prev.png"));
 		firstItemButton = new JButton(new ImageIcon("first.png"));
 		lastItemButton = new JButton(new ImageIcon("last.png"));
 		
@@ -272,7 +269,7 @@ public class BankApplication extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				saveOpenValues();
 				
-				currentItem =29;
+//				currentItem =29;
 								
 				while(!table.containsKey(currentItem)){
 					currentItem--;
@@ -341,7 +338,6 @@ public class BankApplication extends JFrame {
 			public void actionPerformed(ActionEvent e){
 		
 				JFrame frame = new JFrame("TableDemo");
-				JPanel pan = new JPanel();
 			
 		        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				String col[] = {"ID","Number","Name", "Account Type", "Balance", "Overdraft"};
@@ -486,14 +482,12 @@ public class BankApplication extends JFrame {
 			public void actionPerformed(ActionEvent e){
 				String accNum = JOptionPane.showInputDialog("Account number to withdraw from: ");
 				String toWithdraw = JOptionPane.showInputDialog("Account found, Enter Amount to Withdraw: ");
-				boolean found;
 				
 				for (Map.Entry<Integer, BankAccount> entry : table.entrySet()) {
 					
 
 					if(accNum.equals(entry.getValue().getAccountNumber().trim())){
 						
-						found = true;
 						
 						if(entry.getValue().getAccountType().trim().equals("Current")){
 							if(Double.parseDouble(toWithdraw) > entry.getValue().getBalance() + entry.getValue().getOverdraft())
@@ -558,35 +552,7 @@ public class BankApplication extends JFrame {
 	
 	private static RandomAccessFile input;
 	private static RandomAccessFile output;
-	private static final int NUMBER_RECORDS = 100;
 
-	
-	public static void openFileRead()
-	   {
-		
-		table.clear();
-			
-		fc = new JFileChooser();
-		int returnVal = fc.showOpenDialog(null);
-		 
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = fc.getSelectedFile();
-
-        } else {
-                }
-
-			
-		      try // open file
-		      {
-		    	  if(fc.getSelectedFile()!=null)
-		    		  input = new RandomAccessFile( fc.getSelectedFile(), "r" );
-		      } // end try
-		      catch ( IOException ioException )
-		      {
-		    	  JOptionPane.showMessageDialog(null, "File Does Not Exist.");
-		      } // end catch
-			
-	   } // end method openFile
 	
 	static String fileToSaveAs = "";
 	
@@ -706,7 +672,6 @@ public static void saveToFile(){
 	
 		RandomAccessBankAccount record = new RandomAccessBankAccount();
 	
-	      Scanner input = new Scanner( System.in );
 
 	      
 	      for (Map.Entry<Integer, BankAccount> entry : table.entrySet()) {
@@ -746,7 +711,6 @@ public static void saveToFile(){
 	}
 	
 	public static void readFile(){
-	    openFileRead();
 	    readRecords();
 	    closeFile();		
 	}
