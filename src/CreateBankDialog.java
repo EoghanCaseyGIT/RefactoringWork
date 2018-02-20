@@ -12,8 +12,6 @@ public class CreateBankDialog extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private final static int TABLE_SIZE = 29;
 	Random rand = new Random();
-	
-	ArrayList<BankAccount> accountList;
 
 	HashMap<Integer, BankAccount> table = new HashMap<Integer, BankAccount>();
 	
@@ -30,11 +28,10 @@ public class CreateBankDialog extends JFrame {
 	
 	// Constructor code based on that for the Create and Edit dialog classes in the Shapes exercise.
 
-	JLabel accountIDLabel, accountNumberLabel, firstNameLabel, surnameLabel, accountTypeLabel, balanceLabel, overdraftLabel;
+	JLabel accountNumberLabel, firstNameLabel, surnameLabel, accountTypeLabel, balanceLabel, overdraftLabel;
 	
 	
-	JTextField accountNumberTextField;
-	final JTextField firstNameTextField, surnameTextField, accountTypeTextField, balanceTextField, overdraftTextField;
+	final JTextField accountNumberTextField, firstNameTextField, surnameTextField, accountTypeTextField, balanceTextField, overdraftTextField;
 	
 	CreateBankDialog(HashMap<Integer, BankAccount> accounts) {
 		
