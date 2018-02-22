@@ -109,7 +109,7 @@ public class CreateBankDialog extends JFrame {
 				String accountType = comboBox.getSelectedItem().toString();
 
 		
-				if (accountNumber != null && accountNumber.length()==8 && surname != null && firstName != null && accountType != null) {
+				if (accountNumber != null && accountNumber.length()==8 && !surname.isEmpty()  && !firstName.isEmpty()  && accountType != null) {
 					try {
 						
 						boolean accNumTaken=false;
@@ -156,7 +156,9 @@ public class CreateBankDialog extends JFrame {
 				else JOptionPane.showMessageDialog(null, "Please make sure all fields have values, and Account Number is a unique 8 digit number");
 				dispose();
 			}
+			
 		});
+		
 		
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

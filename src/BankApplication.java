@@ -256,7 +256,6 @@ public class BankApplication extends JFrame {
 					if(currentItem>minKey){
 						currentItem--;
 						while(!table.containsKey(currentItem)){
-							//System.out.println("Current: " + currentItem + ", min key: " + minKey);
 							currentItem--;
 						}
 					}
@@ -309,7 +308,8 @@ public class BankApplication extends JFrame {
 			createItem.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 					new CreateBankDialog(table);		
-				}
+					
+				}	
 			});
 			
 			
@@ -326,9 +326,16 @@ public class BankApplication extends JFrame {
 				public void actionPerformed(ActionEvent e){
 					
 					 String interestRateStr = JOptionPane.showInputDialog("Enter Interest Rate: (do not type the % sign)");
+					 if(Double.parseDouble(interestRateStr)>100) {
+						 JOptionPane.showMessageDialog(null, "Can't have interest rates higher than 100, hopefully");
+						 
+						 
+					 } else {
+						 
+					 
 					 if(interestRateStr!=null)
 						 interestRate = Double.parseDouble(interestRateStr);
-				
+					 }
 				}
 			});
 			
@@ -337,7 +344,6 @@ public class BankApplication extends JFrame {
 			
 					JFrame frame = new JFrame("TableDemo");
 				
-			        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					String col[] = {"ID","Number","Name", "Account Type", "Balance", "Overdraft"};
 					
 					DefaultTableModel tableModel = new DefaultTableModel(col, 0);
@@ -358,7 +364,6 @@ public class BankApplication extends JFrame {
 					}
 					frame.setSize(600,500);
 					frame.add(scrollPane);
-					//frame.pack();
 			        frame.setVisible(true);			
 				}
 			});
@@ -397,10 +402,7 @@ public class BankApplication extends JFrame {
 					else if(answer == JOptionPane.NO_OPTION)
 						dispose();
 					else if(answer==0)
-						;
-					
-					
-					
+						;				
 				}
 			});	
 			
@@ -466,54 +468,83 @@ public class BankApplication extends JFrame {
 				public void actionPerformed(ActionEvent e){
 					String accNum = JOptionPane.showInputDialog("Account number to deposit into: ");
 					boolean found = false;
+					if(accNum!=null) {
+
 					
 					for (Map.Entry<Integer, BankAccount> entry : table.entrySet()) {
 						if(accNum.equals(entry.getValue().getAccountNumber().trim())){
 							found = true;
 							String toDeposit = JOptionPane.showInputDialog("Account found, Enter Amount to Deposit: ");
-							entry.getValue().setBalance(entry.getValue().getBalance() + Double.parseDouble(toDeposit));
-							displayDetails(entry.getKey());
-							//balanceTextField.setText(entry.getValue().getBalance()+"");
+							if(toDeposit!=null) {
+								
+							
+								if (Double.parseDouble(toDeposit)<0) {
+									JOptionPane.showMessageDialog(null, "Can't deposit a negative amount.");
+								}
+								else {
+									
+							
+								entry.getValue().setBalance(entry.getValue().getBalance() + Double.parseDouble(toDeposit));
+								displayDetails(entry.getKey());
+								}
+							} else {
+								displayDetails(entry.getKey());
+							}
 						}
 					}
 					if (!found)
 						JOptionPane.showMessageDialog(null, "Account number " + accNum + " not found.");
+				
+				} else {
+					
+					displayDetails(currentItem);
+				}
 				}
 			});
 			
 			withdraw.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 					String accNum = JOptionPane.showInputDialog("Account number to withdraw from: ");
+					if(accNum!=null) {
+
 					
-					for (Map.Entry<Integer, BankAccount> entry : table.entrySet()) {
+						for (Map.Entry<Integer, BankAccount> entry : table.entrySet()) {
+							
+		
+							BankAccount val = entry.getValue();
+							if(accNum.equals(val.getAccountNumber().trim())){
+								
+								//added in, taken from 484
+								String toWithdraw = JOptionPane.showInputDialog("Account found, Enter Amount to Withdraw: ");
+								if(toWithdraw!=null) {
+			
+									if(val.getAccountType().trim().equals("Current")){
+										if(Double.parseDouble(toWithdraw) > val.getBalance() + val.getOverdraft())
+											JOptionPane.showMessageDialog(null, "Transaction exceeds overdraft limit");
+										else{
+											val.setBalance(val.getBalance() - Double.parseDouble(toWithdraw));
+											displayDetails(entry.getKey());
+										}
+									}
+									else if(val.getAccountType().trim().equals("Deposit")){
+										if(Double.parseDouble(toWithdraw) <= val.getBalance()){
+											val.setBalance(val.getBalance()-Double.parseDouble(toWithdraw));
+											displayDetails(entry.getKey());
+										}
+										else
+											JOptionPane.showMessageDialog(null, "Insufficient funds.");
+									}
+								} else 
+									{
+										displayDetails(entry.getKey());
+									}	
+							}	
+							else
+								JOptionPane.showMessageDialog(null, "Account Not Found");
+						}
+					}  else {
 						
-	
-						BankAccount val = entry.getValue();
-						if(accNum.equals(val.getAccountNumber().trim())){
-							
-							//added in, taken from 484
-							String toWithdraw = JOptionPane.showInputDialog("Account found, Enter Amount to Withdraw: ");
-	
-							
-							if(val.getAccountType().trim().equals("Current")){
-								if(Double.parseDouble(toWithdraw) > val.getBalance() + val.getOverdraft())
-									JOptionPane.showMessageDialog(null, "Transaction exceeds overdraft limit");
-								else{
-									val.setBalance(val.getBalance() - Double.parseDouble(toWithdraw));
-									displayDetails(entry.getKey());
-								}
-							}
-							else if(val.getAccountType().trim().equals("Deposit")){
-								if(Double.parseDouble(toWithdraw) <= val.getBalance()){
-									val.setBalance(val.getBalance()-Double.parseDouble(toWithdraw));
-									displayDetails(entry.getKey());
-								}
-								else
-									JOptionPane.showMessageDialog(null, "Insufficient funds.");
-							}
-						}	
-						else
-							JOptionPane.showMessageDialog(null, "Account Not Found");
+						displayDetails(currentItem);
 					}
 				}
 			});
@@ -568,7 +599,6 @@ public class BankApplication extends JFrame {
 		
 	
 		public static void writeFile(){
-			
 			SaveToFile.saveToFile();
 			CloseFile.closeFile();
 		}
