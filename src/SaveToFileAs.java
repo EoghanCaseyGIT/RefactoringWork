@@ -15,14 +15,14 @@ public class SaveToFileAs extends BankApplication {
 		fc = new JFileChooser();
 		
 		 int returnVal = fc.showSaveDialog(null);
-   if (returnVal == JFileChooser.APPROVE_OPTION) {
-       File file = fc.getSelectedFile();
-     
-       fileToSaveAs = file.getName();
-       JOptionPane.showMessageDialog(null, "Accounts saved to " + file.getName());
-   } else {
-       JOptionPane.showMessageDialog(null, "Save cancelled by user");
-   }
+	   if (returnVal == JFileChooser.APPROVE_OPTION) {
+	       File file = fc.getSelectedFile();
+	     
+	       fileToSaveAs = file.getName();
+	       JOptionPane.showMessageDialog(null, "Accounts saved to " + file.getName());
+	   } else {
+	       JOptionPane.showMessageDialog(null, "Save cancelled by user");
+	   }
   	    
 	         try {
 	        	 if(fc.getSelectedFile()==null){

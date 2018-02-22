@@ -521,7 +521,7 @@ public class BankApplication extends JFrame {
 			calcInterest.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 					for (Map.Entry<Integer, BankAccount> entry : table.entrySet()) {
-						if(entry.getValue().getAccountType().equals("C")){
+						if(entry.getValue().getAccountType().equals("Current")){
 							double equation = 1 + ((interestRate)/100);
 							entry.getValue().setBalance(entry.getValue().getBalance()*equation);
 							//System.out.println(equation);
