@@ -566,7 +566,6 @@ public class BankApplication extends JFrame {
 		
 		static String fileToSaveAs = "";
 		
-			
 	
 		public static void writeFile(){
 			

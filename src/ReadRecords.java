@@ -12,8 +12,6 @@ public class ReadRecords extends BankApplication {
 	
 	      RandomAccessBankAccount record = new RandomAccessBankAccount();
 
-	      
-
 	      try // read a record and display
 	      {
 	         while ( true )

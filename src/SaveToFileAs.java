@@ -23,8 +23,7 @@ public class SaveToFileAs extends BankApplication {
    } else {
        JOptionPane.showMessageDialog(null, "Save cancelled by user");
    }
-  
-	    
+  	    
 	         try {
 	        	 if(fc.getSelectedFile()==null){
 	        		 JOptionPane.showMessageDialog(null, "Cancelled");
