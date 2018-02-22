@@ -25,3 +25,11 @@
 /CreateBankDialog.class
 /RandomAccessBankAccount.class
 /FileMethod.class
+/DisplayDetails.class
+/OpenFile.class
+/SaveToFileAs.class
+/CloseFile.class
+/SaveToFile.class
+/ReadRecords.class
+/FileMethods.class
+/Methods.class

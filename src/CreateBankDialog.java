@@ -113,12 +113,12 @@ public class CreateBankDialog extends JFrame {
 						
 						boolean accNumTaken=false;
 							
-							int randNumber = rand.nextInt(24) + 1;
+						int accountID = 1;
 						
 						 for (Map.Entry<Integer, BankAccount> entry : table.entrySet()) {
 							 
-							 while(randNumber == entry.getValue().getAccountID()){
-								 randNumber = rand.nextInt(24)+1;
+							 while(accountID == entry.getValue().getAccountID()){
+								 accountID++;
 							 }		 
 						 }
 					 
@@ -132,7 +132,7 @@ public class CreateBankDialog extends JFrame {
 						if(!accNumTaken){
 						
 						
-							BankAccount account = new BankAccount(randNumber, accountNumber, surname, firstName, accountType, 0.0, 0.0);
+							BankAccount account = new BankAccount(accountID, accountNumber, surname, firstName, accountType, 0.0, 0.0);
 						
 							
 							int key = Integer.parseInt(account.getAccountNumber());

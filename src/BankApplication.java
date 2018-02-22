@@ -521,11 +521,12 @@ public class BankApplication extends JFrame {
 			calcInterest.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 					for (Map.Entry<Integer, BankAccount> entry : table.entrySet()) {
-						if(entry.getValue().getAccountType().equals("Deposit")){
+						if(entry.getValue().getAccountType().equals("C")){
 							double equation = 1 + ((interestRate)/100);
 							entry.getValue().setBalance(entry.getValue().getBalance()*equation);
 							//System.out.println(equation);
 							JOptionPane.showMessageDialog(null, "Balances Updated");
+							
 							displayDetails(entry.getKey());
 						}
 					}
@@ -564,25 +565,25 @@ public class BankApplication extends JFrame {
 	
 		
 		static String fileToSaveAs = "";
+		
 			
 	
 		public static void writeFile(){
 			
-			FileMethod.openFileWrite();
-			FileMethod.saveToFile();
-			//addRecords();
-			FileMethod.closeFile();
+			SaveToFile.saveToFile();
+			CloseFile.closeFile();
 		}
 		
 		public static void saveFileAs(){
-			FileMethod.saveToFileAs();
-			FileMethod.saveToFile();	
-			FileMethod.closeFile();
+			SaveToFileAs.saveToFileAs();
+			SaveToFile.saveToFile();	
+			CloseFile.closeFile();
 		}
 		
 		public static void readFile(){
-		    FileMethod.readRecords();
-		    FileMethod.closeFile();		
+			OpenFile.openFileRead();
+		    ReadRecords.readRecords();
+		    CloseFile.closeFile();		
 		}
 		
 		
