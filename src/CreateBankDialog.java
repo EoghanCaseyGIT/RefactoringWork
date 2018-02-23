@@ -109,7 +109,7 @@ public class CreateBankDialog extends JFrame {
 				String accountType = comboBox.getSelectedItem().toString();
 
 		
-				if (accountNumber != null && accountNumber.length()==8 && !surname.isEmpty()  && !firstName.isEmpty()  && accountType != null) {
+				if (accountNumber != null && Integer.parseInt(accountNumber) >= 0 && accountNumber.length()==8 && !surname.isEmpty()  && !firstName.isEmpty()  && accountType != null) {
 					try {
 						
 						boolean accNumTaken=false;
