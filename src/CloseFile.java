@@ -20,4 +20,5 @@ public class CloseFile extends BankApplication {
 	    	  JOptionPane.showMessageDialog(null, "Error closing file.");//System.exit( 1 );
 	      } // end catch
 	   } // end method closeFile
+	
 }
